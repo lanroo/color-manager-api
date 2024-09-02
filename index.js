@@ -1,6 +1,9 @@
 import express from 'express';
+import cors from 'cors';
 
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 
 let colors = [
@@ -11,19 +14,17 @@ let colors = [
   { name: 'Purple', hex: '#800080' }
 ];
 
-// list colors
+// List colors
 app.get('/colors', (req, res) => {
   res.json(colors);
 });
 
-// new color
 app.post('/colors', (req, res) => {
   const color = req.body;
   colors.push(color);
-  res.status(201).json(color); // that a resource has been created.
+  res.status(201).json(color); 
 });
 
-// retrieve a specific color by name
 app.get('/colors/:name', (req, res) => {
   const colorName = req.params.name;
   const color = colors.find(c => c.name.toLowerCase() === colorName.toLowerCase());
@@ -35,7 +36,6 @@ app.get('/colors/:name', (req, res) => {
   }
 });
 
-// update a specific color by name
 app.put('/colors/:name', (req, res) => {
   const colorName = req.params.name;
   const colorIndex = colors.findIndex(c => c.name.toLowerCase() === colorName.toLowerCase());
@@ -48,7 +48,6 @@ app.put('/colors/:name', (req, res) => {
   }
 });
 
-// remove a specific color by name.
 app.delete('/colors/:name', (req, res) => {
   const colorName = req.params.name;
   const colorIndex = colors.findIndex(c => c.name.toLowerCase() === colorName.toLowerCase());

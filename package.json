@@ -1,7 +1,7 @@
 {
   "name": "web",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple Node.js API using Express to manage a collection of colors. This API allows users to perform CRUD (Create, Read, Update, Delete) operations on color data, including listing all colors, adding new colors, retrieving a specific color by name, updating existing colors, and deleting colors.",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@simonwep/pickr": "^1.9.1",
+    "cors": "^2.8.5",
     "express": "^4.19.2"
   }
 }
