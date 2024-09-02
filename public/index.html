@@ -12,30 +12,37 @@
             margin: 0;
             padding: 0;
             color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         .container {
             max-width: 800px;
-            margin: 20px auto;
+            width: 100%;
             padding: 20px;
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
         h1 {
-            text-align: center;
             color: #007BFF;
             margin-bottom: 20px;
         }
 
         #color-picker {
-            margin-bottom: 20px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: center;
         }
 
         button {
             display: block;
             width: 100%;
+            max-width: 200px;
             padding: 10px;
             border: none;
             border-radius: 5px;
@@ -44,6 +51,7 @@
             font-size: 16px;
             cursor: pointer;
             transition: background 0.3s;
+            margin: 0 auto;
         }
 
         button:hover {
@@ -53,6 +61,7 @@
         ul {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
 
         li {
@@ -72,6 +81,25 @@
             border-radius: 4px;
             vertical-align: middle;
         }
+
+        .pickr .pcr-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 2em;
+            width: 2em;
+            padding: .5em;
+            cursor: pointer;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+            border-radius: .15em;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" stroke="%2342445A" stroke-width="5px" stroke-linecap="round"><path d="M45,45L5,5"></path><path d="M45,5L5,45"></path></svg>') no-repeat center;
+            background-size: 0;
+            transition: all .3s;
+        }
+
+        button.pcr-button {
+            margin-bottom: 3vw;
+        }
     </style>
 </head>
 <body>
@@ -82,6 +110,34 @@
         <ul id="color-list"></ul>
     </div>
     <script src="https://unpkg.com/@simonwep/pickr/dist/pickr.min.js"></script>
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const pickr = Pickr.create({
+                el: '#color-picker',
+                theme: 'classic',
+                default: '#42445A',
+                components: {
+                    preview: true,
+                    opacity: true,
+                    hue: true,
+                    interaction: {
+                        input: true,
+                        save: true
+                    }
+                }
+            });
+
+            document.getElementById('add-color').addEventListener('click', function () {
+                pickr.getColor().then(color => {
+                    const colorCode = color.toHEXA().toString();
+                    navigator.clipboard.writeText(colorCode).then(() => {
+                        alert('Código da cor copiado para a área de transferência!');
+                    }).catch(err => {
+                        console.error('Falha ao copiar para a área de transferência:', err);
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
