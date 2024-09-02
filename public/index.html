@@ -130,18 +130,7 @@
                         save: true
                     }
                 }
-            });
-
-            document.getElementById('add-color').addEventListener('click', function () {
-                pickr.getColor().then(color => {
-                    const colorCode = color.toHEXA().toString();
-                    navigator.clipboard.writeText(colorCode).then(() => {
-                        alert('Código da cor copiado para a área de transferência!');
-                    }).catch(err => {
-                        console.error('Falha ao copiar para a área de transferência:', err);
-                    });
-                });
-            });
+            });           
         });
     </script>
 </body>
