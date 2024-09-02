@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Color Selector</title>
+    <title>Color Picker</title>
     <link rel="stylesheet" href="https://unpkg.com/@simonwep/pickr/dist/themes/classic.min.css" />
     <style>
         body {
@@ -37,6 +37,26 @@
             margin: 0 auto 20px auto;
             display: flex;
             justify-content: center;
+        }
+
+        .color-display {
+            margin-bottom: 20px;
+        }
+
+        .color-input {
+            width: 150px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .copy-icon {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+            vertical-align: middle;
         }
 
         button {
@@ -109,8 +129,12 @@
 </head>
 <body>
     <div class="container">
-        <h1>Color Selector</h1>
+        <h1>Color Picker</h1>
         <div id="color-picker"></div>
+        <div class="color-display">
+            <input type="text" id="color-code" class="color-input" readonly value="#42445A">
+            <img src="https://img.icons8.com/material-outlined/24/000000/copy.png" class="copy-icon" id="copy-button" alt="Copy">
+        </div>
         <button id="add-color">Add color</button>
         <ul id="color-list"></ul>
     </div>
@@ -130,7 +154,23 @@
                         save: true
                     }
                 }
-            });           
+            });
+
+            pickr.on('save', (color, instance) => {
+                pickr.hide(); // Fecha o modal
+                const colorCode = color.toHEXA().toString(); // Obtém o código da cor selecionada
+                document.getElementById('color-code').value = colorCode; // Exibe o código da cor no input
+            });
+
+            // Evento de clique para copiar o código da cor
+            document.getElementById('copy-button').addEventListener('click', function () {
+                const colorCode = document.getElementById('color-code').value;
+                navigator.clipboard.writeText(colorCode).then(() => {
+                    alert('Código da cor copiado para a área de transferência!');
+                }).catch(err => {
+                    console.error('Falha ao copiar para a área de transferência:', err);
+                });
+            });
         });
     </script>
 </body>
