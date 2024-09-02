@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD de Cores</title>
+    <title>Color Selector</title>
     <link rel="stylesheet" href="https://unpkg.com/@simonwep/pickr/dist/themes/classic.min.css" />
     <style>
         body {
@@ -100,13 +100,18 @@
         button.pcr-button {
             margin-bottom: 3vw;
         }
+
+        /*button add color none*/
+        button#add-color {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Color Selector</h1>
         <div id="color-picker"></div>
-        <button id="add-color">Adicionar Cor</button>
+        <button id="add-color">Add color</button>
         <ul id="color-list"></ul>
     </div>
     <script src="https://unpkg.com/@simonwep/pickr/dist/pickr.min.js"></script>
