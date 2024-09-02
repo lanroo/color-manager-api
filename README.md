@@ -81,4 +81,4 @@ A simple Node.js API using Express to manage a collection of colors. This API al
 
 ## License
 
-This project is licensed under the ISC License.
+This project is licensed under the [MIT License](LICENSE).
